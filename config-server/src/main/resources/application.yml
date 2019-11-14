@@ -1,0 +1,28 @@
+server:
+  port: 8888
+  title: default
+spring:
+  cloud:
+    config:
+      server:
+        git:
+#          uri: https://github.com/stormyuan/cloud-config
+          uri: https://github.com/stormyuan/config-repo
+          username: stormyuan
+          password: Se7eN921210
+#  security:
+#    user:
+#      name: user
+#      password: admin
+eureka:
+  instance:
+    appname: config-server
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+#      default-zone: http://user:admin@${eureka.instance.hostname}:8761/eureka/
+      default-zone: http://${eureka.instance.hostname}:8761/eureka/

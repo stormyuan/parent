@@ -1,0 +1,30 @@
+server:
+  title: default
+spring:
+  jpa:
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.MySQL55Dialect"
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://192.168.3.4:3306/dms?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: zkyt2019@mysqldb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dbcp2:
+      validation-query: "SELECT 1"
+      test-while-idle: true
+eureka:
+  instance:
+    appname: user-service
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
